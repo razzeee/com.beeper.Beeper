@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.beeper.Beeper</id>
+  <name>Beeper</name>
+  <project_license>LicenseRef-proprietary</project_license>
+  <developer_name>Beeper</developer_name>
+  <summary>All your chats in one app</summary>
+   <description>
+    <p>Beeper is a universal chat app. With Beeper, you can send and receive messages to friends, family and colleagues on 14 different chat networks, all from a single app.</p>
+
+    <p>Beeper is free to use, with optional paid subscription. You can use Beeper on all your devices — your messages sync seamlessly. Our apps are available on Android, iPhone, iPad, ChromeOS, macOS, Windows and Linux. Download now!</p>
+
+    <p>Our approach to chat is different that the other big chat apps. Chat is our only business. We love chat and are 100% dedicated to making the best chat app on earth. Read more about our mission on our blog and in our chat manifesto.</p>
+  </description>
+  <launchable type="desktop-id">com.beeper.Beeper.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+  <metadata_license>CC0-1.0</metadata_license>
+  <url type="homepage">https://beeper.com/</url>
+  <screenshots>
+    <!-- <screenshot>
+      <caption>beeper rename frontend</caption>
+      <image type="source">https://github.com/razzeee/com.beeper.Beeper/raw/main/rename.png</image>
+    </screenshot> -->
+  </screenshots>
+  <releases>
+    <release version="3.103.36" date="2024-05-01">
+    </release>
+  </releases>
+</component>

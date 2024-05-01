@@ -1,0 +1,51 @@
+app-id: com.beeper.Beeper
+base: org.electronjs.Electron2.BaseApp
+base-version: "23.08"
+runtime: org.freedesktop.Platform
+runtime-version: "23.08"
+sdk: org.freedesktop.Sdk
+command: beeper-run
+separate-locales: false
+finish-args:
+  - --device=dri
+  - --share=ipc
+  - --share=network
+  - --socket=pulseaudio
+  - --socket=x11
+  - --socket=system-bus
+
+  - --filesystem=xdg-download
+modules:
+  - name: beeper
+    buildsystem: simple
+    build-commands:
+      - chmod +x beeper.AppImage
+      - ./beeper.AppImage --appimage-extract
+      - rm beeper.AppImage
+
+      - cp squashfs-root/beeper.desktop com.beeper.Beeper.desktop
+      - desktop-file-edit --set-icon com.beeper.Beeper --set-key Exec --set-value
+        'beeper-run %u' com.beeper.Beeper.desktop
+
+      - cp squashfs-root/beeper.png com.beeper.Beeper.png
+
+      - install -D beeper-run -t ${FLATPAK_DEST}/bin
+      - install -Dm644 com.beeper.Beeper.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - install -Dm644 com.beeper.Beeper.desktop -t ${FLATPAK_DEST}/share/applications
+      - install -Dm644 squashfs-root/usr/share/icons/hicolor/512x512/apps/beeper.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.beeper.Beeper.png
+
+      - mv squashfs-root ${FLATPAK_DEST}/bin/beeper
+
+    sources:
+      - type: script
+        dest-filename: beeper-run
+        commands:
+          - zypak-wrapper /app/bin/beeper/beeper "$@"
+      - type: file
+        path: com.beeper.Beeper.metainfo.xml
+      - type: file
+        url: https://download.beeper.com/linux/appImage/x64
+        sha256: ab1bbf6bc79e59e38a0ac9e8e752762075174d71fcd8a5c135a8dfa0492489df
+        only-arches:
+          - x86_64
+        dest-filename: beeper.AppImage
